@@ -99,9 +99,7 @@ app.get('/books/search', function(req, res) {
 });
 
 app.get('/books', function(req, res) {
-  console.log('////////////////////');
   var user = req.user.rows[0];
-  console.log(user.id);
   var title = req.query['title'];
   books.search(title, function(error, results) {
     if ( ! error ) {
@@ -113,10 +111,8 @@ app.get('/books', function(req, res) {
 });
 
 app.post('/books/add', function(req, res) {
-  console.log('*******************');
-  console.log(req.body.title);
-  console.log(req.user.rows[0]);
-  db.query('INSERT INTO book_lists (title, user_id) VALUES ($1, $2)', [req.body.title, req.user.rows[0].id], function(err, dbRes) {
+  var user = req.user.rows[0];
+  db.query('INSERT INTO book_lists (title, user_id, url) VALUES ($1, $2, $3)', [req.body.title, user.id, req.body.link], function(err, dbRes) {
       if (!err) {
         res.redirect('/books/list');
       }

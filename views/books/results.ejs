@@ -8,9 +8,19 @@
 	<ul>
 		<% for(var i = 0, len = results.length; i < len; i++) { %>
 		<li>
-			<h2><%= results[i].title %></h2>
+			<p>
+				<strong><a href="<%= results[i].link %>"><%= results[i].title %></a></strong><br>
+				<% if(results[i].authors !== undefined) { %>
+					<%= results[i].authors %>
+				<% } else { %>
+				<span>No Author Listed</span>
+				<% } %>
+				<br>
+				<img src="<%= results[i].thumbnail %>" />
+			</p>
 			<form action="/books/add" method="POST">
 				<input type="hidden" name="user_id" value="<%= user.id %>">
+				<input type="hidden" name="link" value="<%= results[i].link %>">
 				<input type="hidden" name="title" value="<%= results[i].title %>">
 				<input type="submit" value="Add to Bookshelf">
 			</form>
