@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/style'));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -58,6 +58,35 @@ console.log('Server running');
 
 //  END BOILER PLATE //
 
+// Home Route 
 app.get('/', function(req, res) {
-  res.render('index')
+  res.render('index');
+});
+
+// Users Routes
+app.get('/users/new', function(req, res) {
+  res.render('users/signup');
+});
+
+app.post('/users', function(req, res) {
+  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [req.body.username, req.body.email, req.body.password], function(err, dbRes) {
+      if (!err) {
+        res.redirect('/sessions/new');
+      }
+  });
+});
+
+// Session routes
+app.get('/sessions/new', function(req, res) {
+  res.render('sessions/login');
+});
+
+app.post('/sessions', passport.authenticate('local', 
+  {failureRedirect: '/sessions/new'}), function(req, res) {
+    res.redirect('/');
+});
+
+app.delete('/sessions', function(req, res) {
+  req.logout();
+  res.redirect('/');
 });
