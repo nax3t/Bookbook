@@ -11,7 +11,8 @@ session       = require('express-session');
 var methodOverride = require('method-override');
 var path       = require('path'),
 LocalStrategy	 = require('passport-local').Strategy,
-passport     	 = require('passport');
+passport     	 = require('passport'),
+books          = require('google-books-search');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -89,4 +90,30 @@ app.post('/sessions', passport.authenticate('local',
 app.delete('/sessions', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+// Book Search
+app.get('/books/search', function(req, res) {
+  res.render('books/search');
+});
+
+// app.get('/books', function(req, res) {
+//   var title = req.query['title'];
+//   request(books.search(title), function(results) {
+//     console.log(results);
+//     var bookResults = JSON.parse(results);
+//     res.send(bookResults);
+//   });
+// });
+
+app.get('/books', function(req, res) {
+  var title = req.query['title'];
+  books.search(title, function(error, results) {
+    if ( ! error ) {
+        console.log(results);
+    } else {
+        console.log(error);
+    }
+    res.render('books/results', {results: results});
+  });
 });
