@@ -61,7 +61,8 @@ console.log('Server running');
 
 // Home Route 
 app.get('/', function(req, res) {
-  res.render('index');
+  var user = req.user;
+  res.render('index', {user:user});
 });
 
 // Users Routes
@@ -92,28 +93,38 @@ app.delete('/sessions', function(req, res) {
   res.redirect('/');
 });
 
-// Book Search
+// Book Routes
 app.get('/books/search', function(req, res) {
   res.render('books/search');
 });
 
-// app.get('/books', function(req, res) {
-//   var title = req.query['title'];
-//   request(books.search(title), function(results) {
-//     console.log(results);
-//     var bookResults = JSON.parse(results);
-//     res.send(bookResults);
-//   });
-// });
-
 app.get('/books', function(req, res) {
+  console.log('////////////////////');
+  var user = req.user.rows[0];
+  console.log(user.id);
   var title = req.query['title'];
   books.search(title, function(error, results) {
     if ( ! error ) {
-        console.log(results);
+      res.render('books/results', {user: user, results: results});
     } else {
-        console.log(error);
+      console.log(error);
     }
-    res.render('books/results', {results: results});
+  });
+});
+
+app.post('/books/add', function(req, res) {
+  console.log('*******************');
+  console.log(req.body.title);
+  console.log(req.user.rows[0]);
+  db.query('INSERT INTO book_lists (title, user_id) VALUES ($1, $2)', [req.body.title, req.user.rows[0].id], function(err, dbRes) {
+      if (!err) {
+        res.redirect('/books/list');
+      }
+  });
+});
+
+app.get('/books/list', function(req, res) {
+  db.query('SELECT * FROM book_lists', function(err, dbRes) {
+    res.render('books/index', { books: dbRes.rows });
   });
 });
