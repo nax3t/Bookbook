@@ -5,24 +5,24 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <h1 class="cover-heading">Bookbook</h1>
-            <p class="lead">Be Shelfish.</p>
-        		<% if(!user) { %>
-							<h1>Login</h1>
-							<form method="POST" action="/sessions">
-								<input type="text" name="username" placeholder="Username">
-								<input type="password" name="password" placeholder="Password">
-								<input type="submit" value="Login">
+            <% if(!user) { %>
+            	<h1 class="cover-heading white">Bookbook</h1>
+            	<p class="lead white">Be Shelfish.</p>
+							<p>
+							<form method="POST" action="/sessions" class="form-inline">
+								<input type="text" name="username" placeholder="Username" class="form-control" id="exampleInputEmail2">
+								<input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputPassword2">
+								<input type="submit" class="btn btn-default" value="Login">
 							</form>
-							<p class="lead">
-								Not a user?<br>
-								<a href="/users/new" class="btn btn-lg btn-default">Register</a>
+							</p>
+							<p class="lead white">
+								Not a user? <a href="/users/new">Register</a>
 							</p>
 						<% } else { %>
 							<p><a href="/books/search">Search for a book</a></p>
 							<p><a href="/books/list">View Your Bookshelf</a></p>
 							<form action="/sessions?_method=DELETE" method="POST">
-								<input type="submit" value="Log out">
+								<input type="submit" class="btn btn-default" value="Log out">
 							</form>
 						<% } %>
 

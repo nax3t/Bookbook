@@ -82,7 +82,7 @@ app.post('/users', function(req, res) {
 
 // Session routes
 app.post('/sessions', passport.authenticate('local', 
-  {failureRedirect: '/sessions/new'}), function(req, res) {
+  {failureRedirect: '/'}), function(req, res) {
     res.redirect('/');
 });
 
