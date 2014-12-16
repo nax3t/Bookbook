@@ -1,19 +1,21 @@
 //  BEGIN BOILER PLATE //
 
 // Set up server
-var express    = require('express');
+var express    = require('express'),
+    partials   = require('express-partials');
 var app        = express();
 var ejs        = require('ejs');
 var db         = require('./db.js');
 var bodyParser = require('body-parser'),
-cookieParser  = require('cookie-parser'),
-session       = require('express-session');
+cookieParser   = require('cookie-parser'),
+session        = require('express-session');
 var methodOverride = require('method-override');
 var path       = require('path'),
 LocalStrategy	 = require('passport-local').Strategy,
 passport     	 = require('passport'),
 books          = require('google-books-search');
 
+app.use(partials());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));

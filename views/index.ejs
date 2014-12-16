@@ -1,23 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home | Books</title>
-</head>
-<body>
-	<% if(!user) { %>
-		<h1>Login</h1>
-		<form method="POST" action="/sessions">
-			<input type="text" name="username" placeholder="Username">
-			<input type="password" name="password" placeholder="Password">
-			<input type="submit">
-		</form>
-		<p>Not a user? <a href="/users/new">Register</a></p>
-	<% } else { %>
-		<p><a href="/books/search">Search for a book</a></p>
-		<p><a href="/books/list">View Your Bookshelf</a></p>
-		<form action="/sessions?_method=DELETE" method="POST">
-			<input type="submit" value="Log out">
-		</form>
-	<% } %>
-</body>
-</html>
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Bookbook</h1>
+            <p class="lead">Be Shelfish.</p>
+        		<% if(!user) { %>
+							<h1>Login</h1>
+							<form method="POST" action="/sessions">
+								<input type="text" name="username" placeholder="Username">
+								<input type="password" name="password" placeholder="Password">
+								<input type="submit" value="Login">
+							</form>
+							<p class="lead">
+								Not a user?<br>
+								<a href="/users/new" class="btn btn-lg btn-default">Register</a>
+							</p>
+						<% } else { %>
+							<p><a href="/books/search">Search for a book</a></p>
+							<p><a href="/books/list">View Your Bookshelf</a></p>
+							<form action="/sessions?_method=DELETE" method="POST">
+								<input type="submit" value="Log out">
+							</form>
+						<% } %>
+
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Bookbook 2014 | Be Shelfish</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
