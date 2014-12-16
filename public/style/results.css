@@ -1,3 +1,64 @@
+/* Main Styling */
+#results {
+  background: #605F5F;
+  color: #fff;
+}
+p {
+  color: #ccc;
+}
+
+/* Navbar */
+.navbar-default.gradient {
+	background: #a9db80; /* Old browsers */
+	background: -moz-linear-gradient(top,  #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #a9db80 0%,#96c56f 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar {
+	border: none;
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+} .navbar-default .navbar-nav>li>a:hover {
+	color: #6c8e51;
+}
+
+/* Results List Items */
+li.resultsLI {
+  padding: 10px;
+  list-style: none;
+}
+
+/* Top Link Button */
+#top-link-block.affix-top {
+    position: absolute; /* allows it to "slide" up into view */
+    bottom: -82px; /* negative of the offset - height of link element */
+    right: 10px; /* padding from the left side of the window */
+}
+#top-link-block.affix {
+    position: fixed; /* keeps it on the bottom once in view */
+    bottom: 18px; /* height of link element */
+    right: 10px; /* padding from the left side of the window */
+}
+
+.well.noBg {
+	background-color: rgba(0,0,0,0);
+	text-decoration: none;
+} .well.noBg:hover {
+	text-decoration: none;
+	color: #ccc;
+}
+/* Theme Styling */
 /*
  * Globals
  */
@@ -7,16 +68,6 @@ a,
 a:focus,
 a:hover {
   color: #fff;
-}
-
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
 }
 
 
@@ -140,4 +191,3 @@ body {
     width: 700px;
   }
 }
-
