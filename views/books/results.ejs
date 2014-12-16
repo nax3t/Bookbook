@@ -21,6 +21,7 @@
 			<form action="/books/add" method="POST">
 				<input type="hidden" name="user_id" value="<%= user.id %>">
 				<input type="hidden" name="link" value="<%= results[i].link %>">
+				<input type="hidden" name="thumbnail" value="<%= results[i].thumbnail %>">
 				<input type="hidden" name="title" value="<%= results[i].title %>">
 				<input type="submit" value="Add to Bookshelf">
 			</form>

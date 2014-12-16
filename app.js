@@ -112,7 +112,7 @@ app.get('/books', function(req, res) {
 
 app.post('/books/add', function(req, res) {
   var user = req.user.rows[0];
-  db.query('INSERT INTO book_lists (title, user_id, url) VALUES ($1, $2, $3)', [req.body.title, user.id, req.body.link], function(err, dbRes) {
+  db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, user.id, req.body.link, req.body.thumbnail], function(err, dbRes) {
       if (!err) {
         res.redirect('/books/list');
       }
@@ -122,5 +122,13 @@ app.post('/books/add', function(req, res) {
 app.get('/books/list', function(req, res) {
   db.query('SELECT * FROM book_lists', function(err, dbRes) {
     res.render('books/index', { books: dbRes.rows });
+  });
+});
+
+app.get('/books/:id', function(req, res) {
+  db.query('SELECT * FROM book_lists WHERE id = $1', [req.params.id], function(err, dbRes) {
+    if (!err) {
+      res.render('books/show', { book: dbRes.rows[0] });
+    }
   });
 });
