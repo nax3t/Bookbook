@@ -4,12 +4,20 @@
 	<title>Home | Books</title>
 </head>
 <body>
-	<h1>Home Page</h1>
-	<h3><a href="/sessions/new">Login</a></h3>
-	<p>Not a user? <a href="/users/new">Register Here</a></p>
-	<% if(user) { %>
-		<a href="/books/search">Search for a book</a>
-		<a href="/books/list">View Your Bookshelf</a>
+	<% if(!user) { %>
+		<h1>Login</h1>
+		<form method="POST" action="/sessions">
+			<input type="text" name="username" placeholder="Username">
+			<input type="password" name="password" placeholder="Password">
+			<input type="submit">
+		</form>
+		<p>Not a user? <a href="/users/new">Register</a></p>
+	<% } else { %>
+		<p><a href="/books/search">Search for a book</a></p>
+		<p><a href="/books/list">View Your Bookshelf</a></p>
+		<form action="/sessions?_method=DELETE" method="POST">
+			<input type="submit" value="Log out">
+		</form>
 	<% } %>
 </body>
 </html>
