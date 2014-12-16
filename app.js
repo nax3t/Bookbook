@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/style'));
+app.use(express.static(__dirname + '/public'));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
