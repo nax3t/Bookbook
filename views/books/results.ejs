@@ -2,31 +2,52 @@
 <html>
 <head>
 	<title>Search Results</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-	<h1>Search Results</h1>
-	<ul>
-		<% for(var i = 0, len = results.length; i < len; i++) { %>
-		<li>
-			<p>
-				<strong><a href="<%= results[i].link %>"><%= results[i].title %></a></strong><br>
-				<% if(results[i].authors !== undefined) { %>
-					<%= results[i].authors %>
-				<% } else { %>
-				<span>No Author Listed</span>
+<body class="topPad">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	  <div class="container">
+	    ...
+	  </div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<h1>Search Results</h1>
+			<ul>
+				<% for(var i = 0, len = results.length; i < len; i++) { %>
+				<li class="resultsLI">
+					<p>
+						<strong><a href="<%= results[i].link %>"><%= results[i].title %></a></strong><br>
+						<% if(results[i].authors !== undefined) { %>
+							<%= results[i].authors %>
+						<% } else { %>
+						<span>No Author Listed</span>
+						<% } %>
+						<br>
+						<img src="<%= results[i].thumbnail %>" />
+					</p>
+					<form action="/books/add" method="POST">
+						<input type="hidden" name="user_id" value="<%= user.id %>">
+						<input type="hidden" name="link" value="<%= results[i].link %>">
+						<input type="hidden" name="thumbnail" value="<%= results[i].thumbnail %>">
+						<input type="hidden" name="title" value="<%= results[i].title %>">
+						<input type="submit" value="Add to Bookshelf" class="btn btn-default">
+					</form>
+				</li>
 				<% } %>
-				<br>
-				<img src="<%= results[i].thumbnail %>" />
-			</p>
-			<form action="/books/add" method="POST">
-				<input type="hidden" name="user_id" value="<%= user.id %>">
-				<input type="hidden" name="link" value="<%= results[i].link %>">
-				<input type="hidden" name="thumbnail" value="<%= results[i].thumbnail %>">
-				<input type="hidden" name="title" value="<%= results[i].title %>">
-				<input type="submit" value="Add to Bookshelf">
-			</form>
-		</li>
-		<% } %>
-	</ul>
+			</ul>
+		</div>
+		<!-- /.Row -->
+	</div>
+	<!-- /.Container -->
+	<span id="top-link-block" class="hidden">
+	    <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+	        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+	    </a>
+	</span><!-- /top-link-block -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="javascript/bookbook.js"></script>
 </body>
 </html>

@@ -101,7 +101,7 @@ app.get('/books', function(req, res) {
   var title = req.query['title'];
   books.search(title, function(error, results) {
     if ( ! error ) {
-      res.render('books/results', {user: user, results: results});
+      res.render('books/results', {user: user, results: results, layout: false});
     } else {
       console.log(error);
     }
