@@ -1,10 +1,20 @@
 /* Main Styling */
 #results {
-  background: #605F5F;
+  background: url('https://defeatingthedragons.files.wordpress.com/2014/09/old-books.jpg') no-repeat 50% 14% fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   color: #fff;
 }
 p {
   color: #ccc;
+}
+
+.well.resultsWell {
+	background: rgba(0,0,0,.7);
+	max-width: 350px;
+	border: 0px;
 }
 
 /* Navbar */
@@ -121,12 +131,6 @@ body {
 }
 
 /* Text */
-.white {
-  color: #fff;
-} .white:hover {
-  color: #fff;
-  }
-
 .clear {
   color: rgba(255,255,255,.5);
 } .clear:hover {

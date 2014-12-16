@@ -34,7 +34,7 @@ body {
 }
 
 .full {
-  background: url(http://classyfella.com/wp-content/uploads/2014/11/pipe.jpg) no-repeat 50% 14% fixed; 
+  background: url(images/pipe.jpg) no-repeat 50% 14% fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
