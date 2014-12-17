@@ -10,8 +10,8 @@
             	<p class="lead white"><span class="glyphicon glyphicon-book"></span> Be Shelfish.</p>
 							<p>
 							<form method="POST" action="/sessions" class="form-inline">
-								<input type="text" name="username" placeholder="Username" class="form-control" id="exampleInputEmail2">
-								<input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputPassword2">
+								<input type="text" name="username" placeholder="Username" class="form-control customInput" id="exampleInputEmail2">
+								<input type="password" name="password" placeholder="Password" class="form-control customInput" id="exampleInputPassword2">
 								<input type="submit" class="btn btn-default" value="Login">
 							</form>
 							</p>
@@ -21,7 +21,7 @@
 						<% } else { %>
 							<p>	
 								<form method="GET" action="/books" class="form-inline">
-									<input type="text" name="title" placeholder="Input keywords here..." class="form-control">
+									<input type="text" name="title" placeholder="Input keywords here..." class="form-control customInput">
 									<input type="submit" value="Search" class="btn btn-default">
 								</form>
 							<p>
