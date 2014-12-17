@@ -1,6 +1,6 @@
 /* Main Styling */
 .bookStyle {
-  background: url('../images/subtle.jpg') no-repeat fixed, url('../images/image.jpg') no-repeat 50% 14% fixed; 
+  background: url('../images/image.jpg') no-repeat fixed, url('../images/subtle.jpg') no-repeat 50% 14% fixed; 
   background-blend-mode: multiply;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,26 +12,43 @@ p {
   color: #ccc;
 }
 
-.well.resultsWell {
-	background: rgba(0,0,0,.7);
-	max-width: 350px;
-	border: 0px;
+input.customInput {
+  color: #ccc;
+  background: rgba(0,0,0,.6);
+  border: 0px;
+}
+
+.btn-books {
+color: #333;
+background-color: rgba(255,255,255,.5);
+border: 0px;
+} .btn-books:hover {
+background-color: rgba(255,255,255,.6);
 }
 
 .customWell {
-  background: rgba();
+  background: rgba(0,0,0,.7);
   border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,.5);
   border-radius: 15px;
   padding: 10px 20px;
   margin: 0px auto 10px auto;
-  width: 300px;
-  background: rgba(0,0,0,.7);
 } .customWell:hover {
   background: rgba(255,255,255,.7);
   color: #000;
-} .customWell a:hover {
+}
+
+.customWell2 {
+  background: rgba(0,0,0,.7);
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 0px auto 10px auto;
+}
+
+.noDec:hover {
   text-decoration: none;
-  color: #000;
 }
 
 /* Results List Items */
@@ -83,14 +100,6 @@ body {
 body {
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-}
-
-.full {
-  background: url(http://classyfella.com/wp-content/uploads/2014/11/pipe.jpg) no-repeat 50% 14% fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */

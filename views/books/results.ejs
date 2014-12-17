@@ -4,7 +4,7 @@
 		<div class="col-sm-4"></div>
 			<div class="col-sm-4">
 				<% for(var i = 0, len = results.length; i < len; i++) { %>
-				<div class="well resultsWell">
+				<div class="well customWell2">
 					<p>
 						<h4><strong><a href="<%= results[i].link %>" class="white"><%= results[i].title %></a></strong></h4>
 						<% if(results[i].authors !== undefined) { %>
@@ -19,7 +19,7 @@
 						<input type="hidden" name="link" value="<%= results[i].link %>">
 						<input type="hidden" name="thumbnail" value="<%= results[i].thumbnail %>">
 						<input type="hidden" name="title" value="<%= results[i].title %>">
-						<input type="submit" value="Add to Bookshelf" class="btn btn-default">
+						<input type="submit" value="Add to Bookshelf" class="btn btn-books">
 					</form>
 				</div>
 				<% } %>
@@ -29,9 +29,4 @@
 		<!-- /.Row -->
 	</div>
 	<!-- /.Container -->
-	<span id="top-link-block" class="hidden">
-	    <a href="#top" class="well well-sm noBg"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
-	        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
-	    </a>
-	</span><!-- /top-link-block -->
 <% include ../footer.ejs %>

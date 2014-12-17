@@ -2,12 +2,16 @@
 	<div class="container">
 		<h1>Book List</h1>
 		<hr width="50%">
+		<div class="row">
 			<% for(var i = 0, len = (books.length) / 2; i < len; i++) { %>
-				<div class="customWell">
-        	<a href="/books/<%= books[i].id %>"><%= books[i].title %></a>
-        </div>  
+				<div class="col-sm-4">
+					<a href="/books/<%= books[i].id %>" class="noDec">
+						<div class="customWell">
+      	  		<%= books[i].title %>
+      		  </div>  
+      	  </a>
+      	</div>
 			<% } %>
-   </table>
-</div>
+		</div>
 	</div>
 <% include ../footer.ejs %>

@@ -75,7 +75,7 @@ app.get('/users/new', function(req, res) {
 app.post('/users', function(req, res) {
   db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [req.body.username, req.body.email, req.body.password], function(err, dbRes) {
       if (!err) {
-        res.redirect('/sessions/new');
+        res.redirect('/');
       }
   });
 });
@@ -99,7 +99,7 @@ app.get('/books', function(req, res) {
     if ( ! error ) {
       res.render('books/results', {user: user, results: results, layout: false});
     } else {
-      console.log(error);
+        console.log(error);
     }
   });
 });

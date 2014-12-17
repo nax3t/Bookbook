@@ -1,9 +1,20 @@
 <% include ../header.ejs %>
 	<div class="container">
 		<h1><%= book.title %></h1>
-		<img src="<%= book.thumb %>" />
-		<p>
-			<a href="<%= book.url %>">View on Google Books</a>
-		</p>
+		<hr width="50%">
+		<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+		<a href="<%= book.url %>">
+		<div class="customWell2">
+			<p><img src="<%= book.thumb %>" /></p>
+			<p>
+				View on Google Books
+			</p>
+		</div>
+		</a>
+		</div>
+		<div class="col-sm-4"></div>
+		</div>
 	</div>
 <% include ../footer.ejs %>
