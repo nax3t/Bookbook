@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bookbook. Be Shelfish.</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../style/results.css">
+		<link rel="icon" 
+      type="../image/x-icon"
+      href="../images/book.ico">
+</head>
+<body class="topPad bookStyle">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-book"></span> Bookbook</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/books/list">Bookshelf</a></li>
+          </ul>
+          <form method="GET" action="/books" class="navbar-form navbar-right" role="search">
+  					<div class="form-group">
+  			  		<input type="text" class="form-control" name ="title" placeholder="Search further...">
+  					</div>
+  						<button type="submit" class="btn btn-default">Search</button>
+					</form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

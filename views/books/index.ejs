@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Book List</title>
-</head>
-<body>
-	<h1>Book List</h1>
-	<ul>
-	<% for(var i = 0, len = books.length; i < len; i++) { %>
-		<li>
-			<h2>
-				<a href="/books/<%= books[i].id %>"><%= books[i].title %></a>
-			</h2>
-		</li>
-	<% } %>
-	</ul>
-</body>
-</html>
+<% include ../header.ejs %>
+	<div class="container">
+		<h1>Book List</h1>
+		<hr width="50%">
+			<% for(var i = 0, len = (books.length) / 2; i < len; i++) { %>
+				<div class="customWell">
+        	<a href="/books/<%= books[i].id %>"><%= books[i].title %></a>
+        </div>  
+			<% } %>
+   </table>
+</div>
+	</div>
+<% include ../footer.ejs %>

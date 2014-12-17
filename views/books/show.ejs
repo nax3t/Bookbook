@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title><%= book.title %></title>
-</head>
-<body>
-	<h1><%= book.title %></h1>
-	<img src="<%= book.thumb %>" />
-	<p>
-		<a href="<%= book.url %>">View on Google Books</a>
-	</p>
-</body>
-</html>
+<% include ../header.ejs %>
+	<div class="container">
+		<h1><%= book.title %></h1>
+		<img src="<%= book.thumb %>" />
+		<p>
+			<a href="<%= book.url %>">View on Google Books</a>
+		</p>
+	</div>
+<% include ../footer.ejs %>

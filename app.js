@@ -92,10 +92,6 @@ app.delete('/sessions', function(req, res) {
 });
 
 // Book Routes
-app.get('/books/search', function(req, res) {
-  res.render('books/search');
-});
-
 app.get('/books', function(req, res) {
   var user = req.user.rows[0];
   var title = req.query['title'];
@@ -119,14 +115,14 @@ app.post('/books/add', function(req, res) {
 
 app.get('/books/list', function(req, res) {
   db.query('SELECT * FROM book_lists', function(err, dbRes) {
-    res.render('books/index', { books: dbRes.rows });
+    res.render('books/index', { books: dbRes.rows, layout: false });
   });
 });
 
 app.get('/books/:id', function(req, res) {
   db.query('SELECT * FROM book_lists WHERE id = $1', [req.params.id], function(err, dbRes) {
     if (!err) {
-      res.render('books/show', { book: dbRes.rows[0] });
+      res.render('books/show', { book: dbRes.rows[0], layout: false });
     }
   });
 });
