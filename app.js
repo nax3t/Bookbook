@@ -93,15 +93,17 @@ app.delete('/sessions', function(req, res) {
 
 // Book Routes
 app.get('/books', function(req, res) {
-  var user = req.user.rows[0];
-  var title = req.query['title'];
-  books.search(title, function(error, results) {
-    if ( ! error ) {
-      res.render('books/results', {user: user, results: results, layout: false});
-    } else {
-        console.log(error);
-    }
-  });
+  if(req.user) {
+    var user = req.user.rows[0];
+    var title = req.query['title'];
+    books.search(title, function(error, results) {
+      if ( ! error ) {
+        res.render('books/results', { user: user, results: results, layout: false });
+      } else {
+          console.log(error);
+      }
+    });
+} else { res.redirect('/'); };
 });
 
 app.post('/books/add', function(req, res) {
@@ -125,4 +127,8 @@ app.get('/books/:id', function(req, res) {
       res.render('books/show', { book: dbRes.rows[0], layout: false });
     }
   });
+});
+
+app.get('*', function( req, res) {
+ res.redirect('/');
 });
