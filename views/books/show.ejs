@@ -18,8 +18,9 @@
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
 				<div class="customWell2">
-					<form action="/books/review" method="POST">
-						<p><textarea class="form-control" rows="5" name="review" placeholder="Review: <%= book.title %>"></textarea></p>
+					<form action="/books/<%= book.id %>/reviews" method="POST">
+						<p><textarea class="form-control" rows="5" name="body" placeholder="Review: <%= book.title %>"></textarea></p>
+						<input type="hidden" name="book_name" value="<%= book.title %>">
 						<input type="Submit" class="btn btn-books">
 					</form>
 				</div>

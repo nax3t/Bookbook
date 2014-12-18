@@ -5,3 +5,7 @@ if ( ($(window).height() + 100) < $(document).height() ) {
         offset: {top:100}
     });
 }
+
+function goBack() {
+    window.history.back()
+}

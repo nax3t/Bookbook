@@ -33,8 +33,8 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  db.query("SELECT * FROM users WHERE id = $1", [id], function (err, user) {
-    done(err, user);
+  db.query("SELECT * FROM users WHERE id = $1", [id], function (err, dbRes) {
+    done(err, dbRes.rows[0]);
   });
 });
 
@@ -94,7 +94,7 @@ app.delete('/sessions', function(req, res) {
 // Book Routes
 app.get('/books', function(req, res) {
   if(req.user) {
-    var user = req.user.rows[0];
+    var user = req.user;
     var title = req.query['title'];
     books.search(title, function(error, results) {
       if ( ! error ) {
@@ -107,7 +107,7 @@ app.get('/books', function(req, res) {
 });
 
 app.post('/books/add', function(req, res) {
-  var user = req.user.rows[0];
+  var user = req.user;
   db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, user.id, req.body.link, req.body.thumbnail], function(err, dbRes) {
       if (!err) {
         res.redirect('/books/list');
@@ -116,7 +116,8 @@ app.post('/books/add', function(req, res) {
 });
 
 app.get('/books/list', function(req, res) {
-  db.query('SELECT * FROM book_lists', function(err, dbRes) {
+  var user = req.user;
+  db.query('SELECT * FROM book_lists WHERE user_id = $1', [user.id], function(err, dbRes) {
     res.render('books/index', { books: dbRes.rows, layout: false });
   });
 });
@@ -129,6 +130,26 @@ app.get('/books/:id', function(req, res) {
   });
 });
 
+/* Reviews Routes*/
+app.post('/books/:book_id/reviews', function(req, res) {
+  console.log(req.params.book_id);
+  var user = req.user;
+  db.query('INSERT INTO reviews (body, book_id, user_id, book_name) VALUES ($1, $2, $3, $4)', [req.body.body, req.params.book_id, user.id, req.body.book_name], function(err, dbRes) {
+      if (!err) {
+        res.redirect('/reviews/:id');
+      }
+  });
+});
+
+app.get('/reviews/:id', function(req, res) {
+  db.query('SELECT * FROM reviews WHERE book_id = $1', [req.params.id], function(err, dbRes) {
+    if (!err) {
+      res.render('reviews/show', { review: dbRes.rows[0], layout: false });
+    }
+  });
+});
+
+/* 404 Route */
 app.get('*', function( req, res) {
  res.redirect('/');
 });
