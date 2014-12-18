@@ -153,7 +153,7 @@ app.get('/reviews/:id', function(req, res) {
   console.log('Book ID: ' + req.params.id);
   db.query('SELECT * FROM reviews WHERE book_id = $1', [req.params.id], function(err, dbRes) {
     if (!err) {
-      res.render('reviews/show', { reviews: dbRes.rows, layout: false });
+      res.render('reviews/show', { reviews: dbRes.rows, params: req.params.id, layout: false });
     }
   });
 });

@@ -1,4 +1,5 @@
 <% include ../header.ejs %>
+	<% if (reviews[0] !== undefined) { %>
 	<h1><%= reviews[0].book_name %> - Review</h1>
 	<hr width="50%">
 			<% for (var i = 0, len = reviews.length; i < len; i++) { %>
@@ -13,5 +14,9 @@
 				<div class="col-sm-4"></div>
 			</div>
 			<% } %>
+		<% } else { %>
+			<h1>This book has no reviews.</h1>
+			<p><a href="/books/<%= params %>">Leave a review</a></p>
+		<% } %>
 		<button onclick="goBack()" class="btn btn-books">Go Back</button>
 <% include ../footer.ejs %>
