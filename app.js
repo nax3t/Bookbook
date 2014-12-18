@@ -143,17 +143,17 @@ app.post('/books/:book_id/reviews', function(req, res) {
   var user = req.user;
   db.query('INSERT INTO reviews (body, book_id, user_id, book_name) VALUES ($1, $2, $3, $4)', [req.body.body, req.params.book_id, user.id, req.body.book_name], function(err, dbRes) {
       if (!err) {
-        res.redirect('/reviews/' + req.params.book_id);
+        res.redirect('/reviews/' + req.body.book_name);
       }
   });
 });
 
-app.get('/reviews/:id', function(req, res) {
+app.get('/reviews/:book_name', function(req, res) {
   console.log('*********');
-  console.log('Book ID: ' + req.params.id);
-  db.query('SELECT * FROM reviews WHERE book_id = $1', [req.params.id], function(err, dbRes) {
+  console.log('Book ID: ' + req.params.book_name);
+  db.query('SELECT * FROM reviews WHERE book_name = $1', [req.params.book_name], function(err, dbRes) {
     if (!err) {
-      res.render('reviews/show', { reviews: dbRes.rows, params: req.params.id, layout: false });
+      res.render('reviews/show', { reviews: dbRes.rows, params: req.params.book_name, layout: false });
     }
   });
 });
