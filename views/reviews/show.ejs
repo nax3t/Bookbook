@@ -6,11 +6,12 @@
 			<div class="col-sm-4"></div>
 				<div class="col-sm-4">
 					<div class="customWell2">
-						<p><%= reviews[i].user_id %><%= reviews[i].body %></p>
+						<p>User:<%= reviews[i].user_id %></p>
+						<p><%= reviews[i].body %></p>
 					</div>
 				</div>
 				<div class="col-sm-4"></div>
 			</div>
 			<% } %>
-			<button onclick="goBack()" class="btn btn-books">Go Back</button>
+		<button onclick="goBack()" class="btn btn-books">Go Back</button>
 <% include ../footer.ejs %>
