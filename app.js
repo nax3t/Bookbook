@@ -134,14 +134,14 @@ app.get('/books/:id', function(req, res) {
 });
 
 /* Reviews Routes*/
-app.post('/books/:book_id/reviews', function(req, res) {
+app.post('/reviews/', function(req, res) {
   console.log('////////////////////');
   console.log('Body: ' + req.body.body);
-  console.log('Book ID: ' + req.params.book_id);
+  console.log('Book ID: ' + req.body.book_id);
   console.log('User ID: ' + req.user.id);
   console.log('Book name: ' + req.body.book_name);
   var user = req.user;
-  db.query('INSERT INTO reviews (body, book_id, user_id, book_name) VALUES ($1, $2, $3, $4)', [req.body.body, req.params.book_id, user.id, req.body.book_name], function(err, dbRes) {
+  db.query('INSERT INTO reviews (body, book_id, user_id, book_name) VALUES ($1, $2, $3, $4)', [req.body.body, req.body.book_id, user.id, req.body.book_name], function(err, dbRes) {
       if (!err) {
         res.redirect('/reviews/' + req.body.book_name);
       }
