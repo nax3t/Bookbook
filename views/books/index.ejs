@@ -2,8 +2,9 @@
 	<div class="container">
 		<h1>Book List</h1>
 		<hr width="50%">
-		<div class="row">
-			<% for(var i = 0, len = books.length; i < len; i++) { %>
+		<% for(var i = 0, len = books.length; i < len; i++) { %>
+			<div class="row">
+			<div class="col-sm-4"></div>
 				<div class="col-sm-4">
 					<a href="/books/<%= books[i].id %>" class="noDec">
 						<div class="customWell">
@@ -12,7 +13,8 @@
       	  </a>
       	  <p><a href="/reviews/<%= books[i].id %>">Review</a></p>
       	</div>
-			<% } %>
-		</div>
+      <div class="col-sm-4"></div>
+      </div>
+		<% } %>
 	</div>
 <% include ../footer.ejs %>

@@ -1,14 +1,16 @@
 <% include ../header.ejs %>
-	<h1><%= review.book_name %> - Review</h1>
+	<h1><%= reviews[0].book_name %> - Review</h1>
 	<hr width="50%">
-		<div class="row">
+			<% for (var i = 0, len = reviews.length; i < len; i++) { %>
+			<div class="row">
 			<div class="col-sm-4"></div>
 				<div class="col-sm-4">
 					<div class="customWell2">
-						<p><%= review.body %></p>
+						<p><%= reviews[i].user_id %><%= reviews[i].body %></p>
 					</div>
-					<button onclick="goBack()" class="btn btn-books">Go Back</button>
 				</div>
-			<div class="col-sm-4"></div>
-		</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<% } %>
+			<button onclick="goBack()" class="btn btn-books">Go Back</button>
 <% include ../footer.ejs %>
