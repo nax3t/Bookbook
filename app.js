@@ -113,7 +113,7 @@ app.post('/books', function(req, res) {
       db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, req.user.id, req.body.link, req.body.thumbnail], function(err, dbRes2) {
         db.query('SELECT id FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes3) {
           db.query('INSERT INTO users_books (user_id, book_id) VALUES ($1, $2)', [req.user.id, dbRes3.rows[0].id], function(err, dbRes4) {
-              res.redirect('/books/list');
+            res.redirect('/books/list');
           });
         });
       });
@@ -131,12 +131,9 @@ app.post('/books', function(req, res) {
 
 app.get('/books/list', function(req, res) {
   if(req.user) {
-    // db.query('SELECT book_id FROM users_books WHERE user_id = $1', [req.user.id], function(err, dbRes1) {
-      // console.log(dbRes1);
-    db.query('SELECT * FROM book_lists WHERE user_id = $1', [req.user.id], function(err, dbRes2) {
-      console.log(dbRes2);
+    db.query('SELECT * FROM book_lists', function(err, dbRes) {
       if (!err) {
-        res.render('books/index', { books: dbRes2.rows, layout: false });
+        res.render('books/index', { books: dbRes.rows, layout: false });
       }
     // });
     });
@@ -146,7 +143,7 @@ app.get('/books/list', function(req, res) {
 app.get('/books/:id', function(req, res) {
   db.query('SELECT * FROM book_lists WHERE id = $1', [req.params.id], function(err, dbRes) {
     if (!err) {
-      res.render('books/show', { book: dbRes.rows[0], layout: false });
+      res.render('books/show', { user: req.user, book: dbRes.rows[0], layout: false });
     }
   });
 });
@@ -154,7 +151,7 @@ app.get('/books/:id', function(req, res) {
 /* Reviews Routes*/
 app.post('/reviews/', function(req, res) {
   var user = req.user;
-  db.query('INSERT INTO reviews (body, book_id, user_id) VALUES ($1, $2, $3)', [req.body.body, req.body.book_id, user.id], function(err, dbRes) {
+  db.query('INSERT INTO reviews (body, book_id, username) VALUES ($1, $2, $3)', [req.body.body, req.body.book_id, user.username], function(err, dbRes) {
       if (!err) {
         res.redirect('/reviews/' + req.body.book_id);
       }
