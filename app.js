@@ -108,19 +108,19 @@ app.get('/books', function(req, res) {
 });
 
 app.post('/books', function(req, res) {
-  db.query('SELECT * FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes1) {
+  db.query('SELECT * FROM books WHERE title = $1', [req.body.title], function(err, dbRes1) {
     if (dbRes1.rows.length === 0) {
-      db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, req.user.id, req.body.link, req.body.thumbnail], function(err, dbRes2) {
-        db.query('SELECT id FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes3) {
+      db.query('INSERT INTO books (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, req.user.id, req.body.link, req.body.thumbnail], function(err, dbRes2) {
+        db.query('SELECT id FROM books WHERE title = $1', [req.body.title], function(err, dbRes3) {
           db.query('INSERT INTO users_books (user_id, book_id) VALUES ($1, $2)', [req.user.id, dbRes3.rows[0].id], function(err, dbRes4) {
             res.redirect('/books/list');
           });
         });
       });
-    } else if(dbRes1.rows[0].user_id === req.user.id) {
+    } else if(dbRes1.rows[0].username === req.user.username) {
       res.redirect('/books');
     } else {
-        db.query('SELECT id FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes5) {
+        db.query('SELECT id FROM books WHERE title = $1', [req.body.title], function(err, dbRes5) {
           db.query('INSERT INTO users_books (user_id, book_id) VALUES ($1, $2)', [req.user.id, dbRes5.rows[0].id], function(err, dbRes6) {
            res.redirect('/books/list');
           });
@@ -131,7 +131,7 @@ app.post('/books', function(req, res) {
 
 app.get('/books/list', function(req, res) {
   if(req.user) {
-    db.query('SELECT * FROM book_lists', function(err, dbRes) {
+    db.query('SELECT * FROM books', function(err, dbRes) {
       if (!err) {
         res.render('books/index', { books: dbRes.rows, layout: false });
       }
@@ -141,7 +141,7 @@ app.get('/books/list', function(req, res) {
 });
 
 app.get('/books/:id', function(req, res) {
-  db.query('SELECT * FROM book_lists WHERE id = $1', [req.params.id], function(err, dbRes) {
+  db.query('SELECT * FROM books WHERE id = $1', [req.params.id], function(err, dbRes) {
     if (!err) {
       res.render('books/show', { user: req.user, book: dbRes.rows[0], layout: false });
     }
@@ -160,7 +160,7 @@ app.post('/reviews/', function(req, res) {
 
 app.get('/reviews/:book_id', function(req, res) {
   db.query('SELECT * FROM reviews WHERE book_id = $1', [req.params.book_id], function(err, dbRes) {
-    db.query('SELECT title FROM book_lists WHERE id = $1', [req.params.book_id], function(err, dbRes2) {
+    db.query('SELECT title FROM books WHERE id = $1', [req.params.book_id], function(err, dbRes2) {
       if (!err) {
         res.render('reviews/show', { book: dbRes2.rows[0], reviews: dbRes.rows, params: req.params.book_id, layout: false });
       }
