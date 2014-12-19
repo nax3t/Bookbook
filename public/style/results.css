@@ -143,7 +143,6 @@ body {
     color: rgba(255,255,255,.5);
   }
 
-
 @media (min-width: 768px) {
 /*
  * Cover
@@ -201,3 +200,4 @@ body {
     width: 700px;
   }
 }
+
