@@ -131,16 +131,19 @@ app.post('/books', function(req, res) {
 
 app.get('/books/list', function(req, res) {
   if(req.user) {
-    db.query('SELECT * FROM book_lists', function(err, dbRes) {
+    // db.query('SELECT book_id FROM users_books WHERE user_id = $1', [req.user.id], function(err, dbRes1) {
+      // console.log(dbRes1);
+    db.query('SELECT * FROM book_lists WHERE user_id = $1', [req.user.id], function(err, dbRes2) {
+      console.log(dbRes2);
       if (!err) {
-        res.render('books/index', { books: dbRes.rows, layout: false });
+        res.render('books/index', { books: dbRes2.rows, layout: false });
       }
+    // });
     });
   } else { res.redirect('/'); };
 });
 
 app.get('/books/:id', function(req, res) {
-  console.log('Book ID found, going to show page!');
   db.query('SELECT * FROM book_lists WHERE id = $1', [req.params.id], function(err, dbRes) {
     if (!err) {
       res.render('books/show', { book: dbRes.rows[0], layout: false });
@@ -150,10 +153,6 @@ app.get('/books/:id', function(req, res) {
 
 /* Reviews Routes*/
 app.post('/reviews/', function(req, res) {
-  console.log('////////////////////');
-  console.log('Body: ' + req.body.body);
-  console.log('Book ID: ' + req.body.book_id);
-  console.log('User id: ' + req.user.id);
   var user = req.user;
   db.query('INSERT INTO reviews (body, book_id, user_id) VALUES ($1, $2, $3)', [req.body.body, req.body.book_id, user.id], function(err, dbRes) {
       if (!err) {
