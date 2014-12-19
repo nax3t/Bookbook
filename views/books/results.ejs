@@ -14,7 +14,7 @@
 						<% } %>
 						<p><img src="<%= results[i].thumbnail %>" /></p>
 					</p>
-					<form action="/books/add" method="POST">
+					<form action="/books" method="POST">
 						<input type="hidden" name="user_id" value="<%= user.id %>">
 						<input type="hidden" name="link" value="<%= results[i].link %>">
 						<input type="hidden" name="thumbnail" value="<%= results[i].thumbnail %>">

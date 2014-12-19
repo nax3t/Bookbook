@@ -3,7 +3,7 @@ var db = {};
 var pg = require('pg');
 
 db.config = {
-  database: "books",
+  database: "books2",
   port: 5432,
   host: "localhost",
   user: "postgres"

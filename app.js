@@ -15,6 +15,7 @@ LocalStrategy	 = require('passport-local').Strategy,
 passport     	 = require('passport'),
 books          = require('google-books-search');
 
+
 app.use(partials());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -56,7 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Listen on port
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 console.log('Server running');
 
 //  END BOILER PLATE //
@@ -106,20 +107,43 @@ app.get('/books', function(req, res) {
 } else { res.redirect('/'); };
 });
 
-app.post('/books/add', function(req, res) {
-  var user = req.user;
-  db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, user.id, req.body.link, req.body.thumbnail], function(err, dbRes) {
-      if (!err) {
-        res.redirect('/books/list');
+app.post('/books', function(req, res) {
+  db.query('SELECT * FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes1) {
+    if (dbRes1.rows.length === 0) {
+      db.query('INSERT INTO book_lists (title, user_id, url, thumb) VALUES ($1, $2, $3, $4)', [req.body.title, req.user.id, req.body.link, req.body.thumbnail], function(err, dbRes2) {
+        db.query('SELECT id FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes3) {
+          db.query('INSERT INTO users_books (user_id, book_id) VALUES ($1, $2)', [req.user.id, dbRes3.rows[0].id], function(err, dbRes4) {
+              res.redirect('/books/list');
+          });
+        });
+      });
+    } else if(dbRes1.rows[0].user_id === req.user.id) {
+      res.redirect('/books');
+    } else {
+        db.query('SELECT id FROM book_lists WHERE title = $1', [req.body.title], function(err, dbRes5) {
+          db.query('INSERT INTO users_books (user_id, book_id) VALUES ($1, $2)', [req.user.id, dbRes5.rows[0].id], function(err, dbRes6) {
+           res.redirect('/books/list');
+          });
+        });
       }
   });
 });
 
+// app.get('/books/list', function(req, res) {
+//   var user = req.user;
+//   if(user) {
+//     db.query('SELECT * FROM book_lists WHERE user_id = $1', [user.id], function(err, dbRes) {
+//       res.render('books/index', { books: dbRes.rows, layout: false });
+//     });
+//   } else { res.redirect('/'); };
+// });
+
 app.get('/books/list', function(req, res) {
-  var user = req.user;
-  if(user) {
-    db.query('SELECT * FROM book_lists WHERE user_id = $1', [user.id], function(err, dbRes) {
-      res.render('books/index', { books: dbRes.rows, layout: false });
+  if(req.user) {
+    db.query('SELECT * FROM book_lists', function(err, dbRes) {
+      if (!err) {
+        res.render('books/index', { books: dbRes.rows });
+      }
     });
   } else { res.redirect('/'); };
 });
