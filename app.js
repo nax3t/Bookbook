@@ -153,23 +153,22 @@ app.post('/reviews/', function(req, res) {
   console.log('////////////////////');
   console.log('Body: ' + req.body.body);
   console.log('Book ID: ' + req.body.book_id);
-  console.log('Username: ' + req.user.username);
-  console.log('Book name: ' + req.body.book_name);
+  console.log('User id: ' + req.user.id);
   var user = req.user;
-  db.query('INSERT INTO reviews (body, book_id, username, book_name) VALUES ($1, $2, $3, $4)', [req.body.body, req.body.book_id, user.username, req.body.book_name], function(err, dbRes) {
+  db.query('INSERT INTO reviews (body, book_id, user_id) VALUES ($1, $2, $3)', [req.body.body, req.body.book_id, user.id], function(err, dbRes) {
       if (!err) {
-        res.redirect('/reviews/' + req.body.book_name);
+        res.redirect('/reviews/' + req.body.book_id);
       }
   });
 });
 
-app.get('/reviews/:book_name', function(req, res) {
-  console.log('*********');
-  console.log('Book ID: ' + req.params.book_name);
-  db.query('SELECT * FROM reviews WHERE book_name = $1', [req.params.book_name], function(err, dbRes) {
-    if (!err) {
-      res.render('reviews/show', { reviews: dbRes.rows, params: req.body.book_id, layout: false });
-    }
+app.get('/reviews/:book_id', function(req, res) {
+  db.query('SELECT * FROM reviews WHERE book_id = $1', [req.params.book_id], function(err, dbRes) {
+    db.query('SELECT title FROM book_lists WHERE id = $1', [req.params.book_id], function(err, dbRes2) {
+      if (!err) {
+        res.render('reviews/show', { book: dbRes2.rows[0], reviews: dbRes.rows, params: req.params.book_id, layout: false });
+      }
+    });
   });
 });
 
