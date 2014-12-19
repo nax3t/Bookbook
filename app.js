@@ -129,20 +129,11 @@ app.post('/books', function(req, res) {
   });
 });
 
-// app.get('/books/list', function(req, res) {
-//   var user = req.user;
-//   if(user) {
-//     db.query('SELECT * FROM book_lists WHERE user_id = $1', [user.id], function(err, dbRes) {
-//       res.render('books/index', { books: dbRes.rows, layout: false });
-//     });
-//   } else { res.redirect('/'); };
-// });
-
 app.get('/books/list', function(req, res) {
   if(req.user) {
     db.query('SELECT * FROM book_lists', function(err, dbRes) {
       if (!err) {
-        res.render('books/index', { books: dbRes.rows });
+        res.render('books/index', { books: dbRes.rows, layout: false });
       }
     });
   } else { res.redirect('/'); };
