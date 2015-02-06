@@ -1,8 +1,10 @@
-# Books
+# Bookbook
 
-This web app allows a user to search for their favorite books and save them to a read list. Users can review and upvote on books they like.
+Bookbook is an express based web application that allows users to search for their favorite books, add them to a
 
-This app is built on Node and Express, it includes:
+public wall, and review them. This app utilizes the Google Books API.
+
+This app includes:
   - Authentication (passport)
   - Authorization
   - RESTful routes
