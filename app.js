@@ -70,7 +70,7 @@ app.get('/', function(req, res) {
 
 // Users Routes
 app.get('/users/new', function(req, res) {
-  res.render('users/signup');
+  res.render('users/signup', { layout: false });
 });
 
 app.post('/users', function(req, res) {

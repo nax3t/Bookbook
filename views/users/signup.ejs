@@ -2,14 +2,18 @@
 <html>
 <head>
 	<title>Registration</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../style/signup.css">
 </head>
 <body>
-	<h1>Sign Up</h1>
-	<form  method="POST" action="/users">
-		<input type="text" name="username" placeholder="Username">
-		<input type="text" name="email" placeholder="Email">
-		<input type="password" name="password" placeholder="Password">
-		<input type="submit">
-	</form>
+	<div class="container">
+		<form  method="POST" action="/users" class="form-signin">
+			<h2 class="form-signin-heading">Sign Up</h2>
+			<input type="text" name="username" placeholder="Username" class="form-control">
+			<input type="text" name="email" placeholder="Email" class="form-control">
+			<input type="password" name="password" placeholder="Password" class="form-control">
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+		</form>
+  </div> <!-- /container -->
 </body>
 </html>
