@@ -7,5 +7,4 @@ This app includes:
   - Authorization
   - RESTful routes
   - Google APIs (Books API)
-  - Registration (OAuth)
   - Styling (Twitter Bootstrap)
