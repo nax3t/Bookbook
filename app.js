@@ -74,6 +74,7 @@ app.get('/users/new', function(req, res) {
 });
 
 app.post('/users', function(req, res) {
+  // ***** NOTE TO SELF: THIS STORES A USER WITH A PLAIN TEXT PASSWORD, VERY BAD! DON'T DO THIS! ******** //
   db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [req.body.username, req.body.email, req.body.password], function(err, dbRes) {
       if (!err) {
         res.redirect('/');
